@@ -3,8 +3,8 @@
 #include <string.h>
 
 typedef struct{
-	char name[100], grupo[30];
-  float preco;
+	char name[100], group[30];
+  float price;
   long int cod;
   int qtde;
 } set_products;
@@ -13,7 +13,7 @@ typedef struct{
 	char name[100], adress[100], cpf[20], number[20], age[3];
 } set_clients;
 
-int abre_file_product(set_products product[], FILE *file){
+int open_file_product(set_products product[], FILE *file){
 
   int x, counter = 0, aux;
   char c;
@@ -27,7 +27,7 @@ int abre_file_product(set_products product[], FILE *file){
 
   do {
 
-    x = fscanf (file, "%s %s %f %ld", product[counter].name, product[counter].grupo, &product[counter].preco, &product[counter].cod);
+    x = fscanf (file, "%s %s %f %ld", product[counter].name, product[counter].group, &product[counter].price, &product[counter].cod);
 
     counter ++;
 
@@ -52,7 +52,7 @@ void fecha_file_product(set_products product[], int quantage_product, FILE *file
 
   for (counter = 0; counter < quantage_product; counter ++){
 
-    fprintf (file, "%s %s %.2f %ld\n", product[counter].name, product[counter].grupo, product[counter].preco, product[counter].cod);
+    fprintf (file, "%s %s %.2f %ld\n", product[counter].name, product[counter].group, product[counter].price, product[counter].cod);
 
   }
 
@@ -60,7 +60,7 @@ void fecha_file_product(set_products product[], int quantage_product, FILE *file
 
 }
 
-int abre_file_client(set_clients client[], FILE *file){
+int open_file_client(set_clients client[], FILE *file){
 
   int x, counter = 0;
 
@@ -105,49 +105,49 @@ void fecha_file_client(set_clients client[], int quantage_client, FILE *file){
   fclose (file);
 
 }
-// void file_bicicleta (set_products bicicleta[], int quantage_product){
+// void file_bike (set_products bike[], int quantage_product){
 
 //   FILE *bike;
 
-//   bike = fopen("bicicletas.txt", "a+");
+//   bike = fopen("bikes.txt", "a+");
 //       if (bike == NULL){
 //         printf ("Erro na abertura do file");
 //         exit(1);
 //       }
 
-//       fprintf (bike, "product: %s\nGrupo: %s\nPreco: R$%.2f\ncod: %ld\n\n", bicicleta[quantage_product].name, bicicleta[quantage_product].grupo, bicicleta[quantage_product].preco, bicicleta[quantage_product].cod);
+//       fprintf (bike, "product: %s\ngroup: %s\nprice: R$%.2f\ncod: %ld\n\n", bike[quantage_product].name, bike[quantage_product].group, bike[quantage_product].price, bike[quantage_product].cod);
 
 //       fclose(bike);
 
 // }
   
-// void file_acessorio  (set_products acessorio[], int quantage_product){
+// void file_accessorie  (set_products accessorie[], int quantage_product){
 
 //   FILE *file;
 
-//   file = fopen("acessorios.txt", "a+");
+//   file = fopen("accessories.txt", "a+");
 //       if (file == NULL){
 //         printf ("Erro na abertura do file");
 //         exit(1);
 //       }
 
-//       fprintf (file, "product: %s\nGrupo: %s\nPreco: R$%.2f\ncod: %ld\n\n", acessorio[quantage_product].name, acessorio[quantage_product].grupo, acessorio[quantage_product].preco, acessorio[quantage_product].cod);
+//       fprintf (file, "product: %s\ngroup: %s\nprice: R$%.2f\ncod: %ld\n\n", accessorie[quantage_product].name, accessorie[quantage_product].group, accessorie[quantage_product].price, accessorie[quantage_product].cod);
 
 //       fclose(file);
 
 // }
 
-// void file_vestuario (set_products vestuario[], int quantage_product){
+// void file_clothing (set_products clothing[], int quantage_product){
 
 //   FILE *roupa;
 
-//   roupa = fopen("vestuarios.txt", "a+");
+//   roupa = fopen("clothings.txt", "a+");
 //       if (roupa == NULL){
 //         printf ("Erro na abertura do file");
 //         exit(1);
 //       }
       
-//       fprintf (roupa, "product: %s\nGrupo: %s\nPreco: R$%.2f\ncod: %ld\n\n", vestuario[quantage_product].name, vestuario[quantage_product].grupo, vestuario[quantage_product].preco, vestuario[quantage_product].cod);
+//       fprintf (roupa, "product: %s\ngroup: %s\nprice: R$%.2f\ncod: %ld\n\n", clothing[quantage_product].name, clothing[quantage_product].group, clothing[quantage_product].price, clothing[quantage_product].cod);
 
 //       fclose(roupa);
 
@@ -155,52 +155,52 @@ void fecha_file_client(set_clients client[], int quantage_client, FILE *file){
 
 void cadastro_product(set_products product[], FILE *file){
 
-  int resposta, gp, quantage;
+  int res, gp, quantage;
 
-  quantage = abre_file_product(product, file);
+  quantage = open_file_product(product, file);
 
   do {
     system ("cls");
     do {
-      printf ("Grupo do product (%d):\n[1]Bicicleta\n[2]Acessorios\n[3]Vestuario\n---------------\n", quantage);
+      printf ("group do product (%d):\n[1]bike\n[2]accessories\n[3]clothing\n---------------\n", quantage);
         scanf ("%d", &gp);
         setbuf(stdin, NULL);
       switch (gp){
         case 1:
-          strcpy(product[quantage].grupo, "Bicicleta");
+          strcpy(product[quantage].group, "bike");
           system("cls");
           break;
         case 2: 
-          strcpy(product[quantage].grupo, "Acessorio");
+          strcpy(product[quantage].group, "accessorie");
           system("cls");
           break;
         case 3: 
-          strcpy(product[quantage].grupo, "Vestuario");
+          strcpy(product[quantage].group, "clothing");
           system("cls");
           break;
         default: 
           system("cls");
-          printf ("Opcao invalida\n\n");
+          printf ("option invalida\n\n");
           break;
       }
     } while (gp != 1 && gp  != 2 && gp != 3);
 
-  	printf ("Digite o name do product (%d): ", quantage);
+  	printf ("type o name do product (%d): ", quantage);
       scanf ("%[^\n]s", product[quantage].name);
       setbuf(stdin, NULL);
-    printf ("Digite o preco do product (%d): R$", quantage);
-      scanf ("%f", &product[quantage].preco);
+    printf ("type o price do product (%d): R$", quantage);
+      scanf ("%f", &product[quantage].price);
       setbuf(stdin, NULL);
-    printf ("Digite o cod do product (%d): ", quantage);
+    printf ("type o cod do product (%d): ", quantage);
       scanf ("%ld", &product[quantage].cod);
       setbuf(stdin, NULL);
 
-    printf ("\nVoce quer cadastrar outro product?\n[1]SIM\n[2]NAO\n----------\n");
-      scanf ("%d", &resposta);
+    printf ("\nWanna add another product?\n[1]YES\n[2]NO\n----------\n");
+      scanf ("%d", &res);
 
     quantage += 1;
     
-  } while (resposta == 1);
+  } while (res == 1);
 
   fecha_file_product(product, quantage, file);
   
@@ -210,17 +210,17 @@ void cadastro_product(set_products product[], FILE *file){
   
 }
 
-void mostra_product(set_products product [], FILE *file){
+void show_product(set_products product [], FILE *file){
 
   int counter, quantage;
 
   system("cls");
 
-  quantage = abre_file_product(product, file);
+  quantage = open_file_product(product, file);
   
   for (counter = 0; counter < quantage; counter ++){
 
-    printf ("name: %s\nGrupo: %s\nPreco: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].grupo, product[counter].preco, product[counter].cod);
+    printf ("name: %s\ngroup: %s\nprice: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].group, product[counter].price, product[counter].cod);
 
   }
 
@@ -228,26 +228,26 @@ void mostra_product(set_products product [], FILE *file){
 
 }
 
-void mostra_product_grupo(set_products product[], FILE *file){
+void show_product_group(set_products product[], FILE *file){
 
-  int counter, opcao, quantage;
+  int counter, option, quantage;
   char texto;
   system("cls");
 
-  quantage = abre_file_product(product, file);
+  quantage = open_file_product(product, file);
 
   do {
-    printf ("Qual grupo de products deve ser mostrado:\n[1]Bicicletas\n[2]Acessorios\n[3]Vestuarios\n\nOpcao: ");
-      scanf ("%d", &opcao);
+    printf ("Wich group of products should be shown:\n[1]bikes\n[2]accessories\n[3]clothing\n\nOption: ");
+      scanf ("%d", &option);
     printf ("\n");
 
-    switch(opcao){
+    switch(option){
 
       case 1:
         system("cls");
         for (counter = 0; counter < quantage; counter ++){
-          if (strcmp(product[counter].grupo, "Bicicleta") == 0){
-            printf ("product: %s\nPreco: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].preco, product[counter].cod);
+          if (strcmp(product[counter].group, "bike") == 0){
+            printf ("product: %s\nprice: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].price, product[counter].cod);
           }
         }
         break;
@@ -255,8 +255,8 @@ void mostra_product_grupo(set_products product[], FILE *file){
       case 2:
         system("cls");
         for (counter = 0; counter < quantage; counter ++){
-          if (strcmp(product[counter].grupo, "Acessorio") == 0){
-            printf ("product: %s\nPreco: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].preco, product[counter].cod);
+          if (strcmp(product[counter].group, "accessorie") == 0){
+            printf ("product: %s\nprice: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].price, product[counter].cod);
           }
         }
         break;
@@ -264,68 +264,68 @@ void mostra_product_grupo(set_products product[], FILE *file){
       case 3:
         system("cls");
         for (counter = 0; counter < quantage; counter ++){
-          if (strcmp(product[counter].grupo, "Vestuario") == 0){
-            printf ("product: %s\nPreco: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].preco, product[counter].cod);
+          if (strcmp(product[counter].group, "clothing") == 0){
+            printf ("product: %s\nprice: R$%.2f\ncod: %ld\n\n", product[counter].name, product[counter].price, product[counter].cod);
           }
         }
         break;
 
         default:
           system("cls");
-          printf ("Opcao invalida\n\n");
+          printf ("invalid option\n\n");
     
     }
 
-  } while (opcao != 1 && opcao != 2 && opcao != 3);
+  } while (option != 1 && option != 2 && option != 3);
 
 }
 
 void cadastro_client(set_clients client[], FILE *file){
 
-  int resposta, aux = 0, quantage;
+  int res, aux = 0, quantage;
 
-  quantage = abre_file_client(client, file);
+  quantage = open_file_client(client, file);
 
   do {
     system ("cls");
 
-    printf ("Digite o name do client: ");
+    printf ("type the name of the client: ");
       scanf ("%[^\n]s", client[quantage].name);
       setbuf(stdin, NULL);
 
-    printf ("Digite a age: ");
+    printf ("type the age: ");
       scanf ("%[^\n]s", client[quantage].age);
       setbuf(stdin, NULL);
     // do {
-    printf ("Digite o CPF do client: ");
+    printf ("type the CPF of the client: ");
       scanf ("%[^\n]s", client[quantage].cpf);
       setbuf(stdin, NULL);
     
-    printf ("Digite o adress: ");
+    printf ("type the adress: ");
       scanf ("%[^\n]s", client[quantage].adress);
       setbuf(stdin, NULL);
 
-    printf ("Digite o numero de number: ");
+    printf ("type the number: ");
       scanf ("%[^\n]s", client[quantage].number);
       setbuf(stdin, NULL);
 
-    printf ("\nVoce quer cadastrar outro client?\n[1]SIM\n[2]NAO\n---------------\n");
-      scanf ("%d", &resposta);
+    printf ("\nWanna add another client?\n[1]YES\n[2]NO\n---------------\n");
+      scanf ("%d", &res);
       setbuf(stdin, NULL);
 
     quantage ++;
 
-  } while (resposta == 1);
+  } while (res == 1);
 
   fecha_file_client(client, quantage, file);
 
 }
 
-void mostra_client(set_clients client[], FILE *file){
+void show_client(set_clients client[], FILE *file){
 
   int quantage, counter;
 
-  quantage = abre_file_client(client, file);
+  quantage = open_file_client(client, file);
 
   system ("cls");
 
@@ -335,16 +335,16 @@ void mostra_client(set_clients client[], FILE *file){
 
 }
 
-void mostra_client_cpf(set_clients client[], FILE *file){
+void show_client_cpf(set_clients client[], FILE *file){
 
   int counter, quantage;
   char cpf[20];
 
   system ("cls");
 
-  quantage = abre_file_client(client, file);
+  quantage = open_file_client(client, file);
 
-  printf ("Digite o cpf do client: ");
+  printf ("type o cpf do client: ");
     scanf ("%s", cpf);
 
   system ("cls");
@@ -372,23 +372,23 @@ int cadastro_client_orcamento(set_clients client[], int *quantage_client){
 
     system ("cls");
 
-    printf ("Digite o name do client: ");
+    printf ("type o name do client: ");
       scanf ("%[^\n]s", client[*quantage_client].name);
       setbuf(stdin, NULL);
 
-    printf ("Digite a age: ");
+    printf ("type a age: ");
       scanf ("%s", client[*quantage_client].age);
       setbuf(stdin, NULL);
     // do {
-    printf ("Digite o CPF do client: ");
+    printf ("type o CPF do client: ");
       scanf ("%[^\n]s", client[*quantage_client].cpf);
       setbuf(stdin, NULL);
     
-    printf ("Digite o adress: ");
+    printf ("type o adress: ");
       scanf ("%[^\n]s", client[*quantage_client].adress);
       setbuf(stdin, NULL);
 
-    printf ("Digite o numero de number: ");
+    printf ("type o number de number: ");
       scanf ("%[^\n]s", client[*quantage_client].number);
       setbuf(stdin, NULL);
 
@@ -423,46 +423,46 @@ int cadastro_product_orcamento(set_products T[], int *quantage_product){
 
     system ("cls");
     do {
-      printf ("Grupo do product (%d):\n[1]Bicicleta\n[2]Acessorios\n[3]Vestuario\n---------------\n", *quantage_product+1);
+      printf ("group do product (%d):\n[1]bike\n[2]accessories\n[3]clothing\n---------------\n", *quantage_product+1);
         scanf ("%d", &gp);
         setbuf(stdin, NULL);
       switch (gp){
         case 1:
-          strcpy(T[*quantage_product].grupo, "Bicicleta");
+          strcpy(T[*quantage_product].group, "bike");
           system("cls");
           break;
         case 2: 
-          strcpy(T[*quantage_product].grupo, "Acessorios");
+          strcpy(T[*quantage_product].group, "accessories");
           system("cls");
           break;
         case 3: 
-          strcpy(T[*quantage_product].grupo, "Vestuario");
+          strcpy(T[*quantage_product].group, "clothing");
           system("cls");
           break;
         default: 
           system("cls");
-          printf ("Opcao invalida\n");
+          printf ("option invalida\n");
           break;
       }
     } while (gp != 1 && gp  != 2 && gp != 3);
 
-  	printf ("Digite o name do product (%d): ", *quantage_product+1);
+  	printf ("type o name do product (%d): ", *quantage_product+1);
       scanf ("%[^\n]s", T[*quantage_product].name);
       setbuf(stdin, NULL);
-    printf ("Digite o preco do product (%d): R$", *quantage_product+1);
-      scanf ("%f", &T[*quantage_product].preco);
+    printf ("type o price do product (%d): R$", *quantage_product+1);
+      scanf ("%f", &T[*quantage_product].price);
       setbuf(stdin, NULL);
-    printf ("Digite o cod do product (%d): ", *quantage_product+1);
+    printf ("type o cod do product (%d): ", *quantage_product+1);
       scanf ("%ld", &T[*quantage_product].cod);
       setbuf(stdin, NULL);
     // system("cls");
 
-    fprintf (cadastro_product, "product: %s\nGrupo: %s\nPreco: R$%.2f\ncod: %ld\n\n", T[*quantage_product].name, T[*quantage_product].grupo, T[*quantage_product].preco, T[*quantage_product].cod);
+    fprintf (cadastro_product, "product: %s\ngroup: %s\nprice: R$%.2f\ncod: %ld\n\n", T[*quantage_product].name, T[*quantage_product].group, T[*quantage_product].price, T[*quantage_product].cod);
     // fprintf (cadastro_product, "product: %s\n", T[*qtde_product].name);
 
-    // if (gp == 1){ file_bicicleta(T, quantage_product);} 
-    //   else if (gp == 2){ file_acessorio(T, quantage_product);} 
-    //     else if (gp == 3){ file_vestuario(T, quantage_product);}
+    // if (gp == 1){ file_bike(T, quantage_product);} 
+    //   else if (gp == 2){ file_accessorie(T, quantage_product);} 
+    //     else if (gp == 3){ file_clothing(T, quantage_product);}
 
     *quantage_product += 1;
   
@@ -475,7 +475,7 @@ int cadastro_product_orcamento(set_products T[], int *quantage_product){
 void orcamento (set_clients client[], int *quantage_client, set_products product[], int *quantage_product, float *vendas_dia){
 
     long int cod;
-    int resposta, counter, resposta_cad, aux = 0, posicao;
+    int res, counter, res_cad, aux = 0, posicao;
     char cpf[20], c;
     float soma = 0;
     
@@ -499,7 +499,7 @@ void orcamento (set_clients client[], int *quantage_client, set_products product
       exit(1);
     }
 
-    printf ("Digite o CPF do client: ");
+    printf ("type o CPF do client: ");
       scanf ("%s", cpf);
       setbuf(stdin, NULL);
 
@@ -510,18 +510,18 @@ void orcamento (set_clients client[], int *quantage_client, set_products product
         fprintf(orcamento_unico, "==================== Orcamento ====================\nname: %s\nCPF: %s\nnumber: %s\n===================================================\n\n", client[counter].name, client[counter].cpf, client[counter].number);
 
         aux++;
-        resposta_cad = 2;
+        res_cad = 2;
         break;
       }
     }
 
     do {
       if (aux == 0){
-        printf ("\nCPF nao encontrado\n\nQuer cadastrar o client?\n[1]SIM\n[2]NAO\n\nOpcao: ");
-          scanf("%d", &resposta_cad);
+        printf ("\nCPF nao encontrado\n\nQuer cadastrar o client?\n[1]SIM\n[2]NAO\n\noption: ");
+          scanf("%d", &res_cad);
           setbuf(stdin, NULL);
         
-        switch (resposta_cad)
+        switch (res_cad)
         {
         case 1:
           posicao = cadastro_client_orcamento(client, quantage_client);
@@ -535,12 +535,12 @@ void orcamento (set_clients client[], int *quantage_client, set_products product
 
         default:
           system ("cls");
-          printf ("Opcao Invalida\n");
+          printf ("option Invalida\n");
           break;
         }
 
       }
-    } while (resposta_cad != 1 && resposta_cad != 2);
+    } while (res_cad != 1 && res_cad != 2);
 
     aux = 0;
    
@@ -548,24 +548,24 @@ void orcamento (set_clients client[], int *quantage_client, set_products product
 
       system("cls");
 
-        printf ("Digite o cod do product: ");
+        printf ("type o cod do product: ");
           scanf ("%ld", &cod);
           setbuf(stdin, NULL);
 
         for (counter = 0; counter < *quantage_product; counter++){
           if (product[counter].cod == cod){
 
-            printf ("Digite a quantage: ");
+            printf ("type a quantage: ");
               scanf("%d", &product[counter].qtde);
               setbuf(stdin, NULL);
 
-            soma += (product[counter].preco*product[counter].qtde);
-            *vendas_dia += (product[counter].preco*product[counter].qtde);
+            soma += (product[counter].price*product[counter].qtde);
+            *vendas_dia += (product[counter].price*product[counter].qtde);
 
-            fprintf(orcamento, "product: %s\nPreco: R$%.2f\nQuantage: %d\n\n", product[counter].name, product[counter].preco, product[counter].qtde);
-            fprintf(orcamento_unico, "product: %s\nPreco: R$%.2f\nQuantage: %d\n\n", product[counter].name, product[counter].preco, product[counter].qtde);
+            fprintf(orcamento, "product: %s\nprice: R$%.2f\nQuantage: %d\n\n", product[counter].name, product[counter].price, product[counter].qtde);
+            fprintf(orcamento_unico, "product: %s\nprice: R$%.2f\nQuantage: %d\n\n", product[counter].name, product[counter].price, product[counter].qtde);
             
-            resposta_cad = 2;
+            res_cad = 2;
             aux ++;
             break;
           }
@@ -573,26 +573,26 @@ void orcamento (set_clients client[], int *quantage_client, set_products product
 
       do {
         if (aux == 0){
-          printf ("\nproduct nao encontrado\n\nQuer cadastrar o product?\n[1]SIM\n[2]NAO\n\nOpcao: ");
-            scanf("%d", &resposta_cad);
+          printf ("\nproduct nao encontrado\n\nQuer cadastrar o product?\n[1]SIM\n[2]NAO\n\noption: ");
+            scanf("%d", &res_cad);
             setbuf(stdin, NULL);
           
-          switch (resposta_cad)
+          switch (res_cad)
           {
           case 1:
             posicao = cadastro_product_orcamento(product, quantage_product);
 
             system("cls");
 
-            printf ("Digite a quantage: ");
+            printf ("type a quantage: ");
               scanf("%d", &product[posicao-1].qtde);
               setbuf(stdin, NULL);
             
-            fprintf(orcamento, "product: %s\nPreco: R$%.2f\nQuantage: %d\n\n", product[posicao-1].name, product[posicao-1].preco, product[posicao-1].qtde);
-            fprintf(orcamento_unico, "product: %s\nPreco: R$%.2f\nQuantage: %d\n\n", product[posicao-1].name, product[posicao-1].preco, product[posicao-1].qtde);
+            fprintf(orcamento, "product: %s\nprice: R$%.2f\nQuantage: %d\n\n", product[posicao-1].name, product[posicao-1].price, product[posicao-1].qtde);
+            fprintf(orcamento_unico, "product: %s\nprice: R$%.2f\nQuantage: %d\n\n", product[posicao-1].name, product[posicao-1].price, product[posicao-1].qtde);
 
-            soma += (product[counter].preco*product[counter].qtde);
-            *vendas_dia += (product[counter].preco*product[counter].qtde);
+            soma += (product[counter].price*product[counter].qtde);
+            *vendas_dia += (product[counter].price*product[counter].qtde);
 
             break;
           
@@ -601,18 +601,18 @@ void orcamento (set_clients client[], int *quantage_client, set_products product
 
           default:
             system ("cls");
-            printf ("Opcao Invalida\n");
+            printf ("option Invalida\n");
             break;
           }
 
         }
-      } while (resposta_cad != 1 && resposta_cad != 2);
+      } while (res_cad != 1 && res_cad != 2);
 
-      printf ("Quer acrescentar mais products?\n[1]SIM\n[2]NAO\n\nOpcao: ");
-        scanf("%d", &resposta);
+      printf ("Quer acrescentar mais products?\n[1]SIM\n[2]NAO\n\noption: ");
+        scanf("%d", &res);
         setbuf(stdin, NULL);
 
-    } while (resposta == 1);
+    } while (res == 1);
 
   fprintf (orcamento, "===================================================\nTotal:\tR$%.2f\n\n", soma);
   fprintf (orcamento_unico, "===================================================\nTotal:\tR$%.2f\n\n", soma);
@@ -649,7 +649,7 @@ void vendas (float *total_vendas){
 
   total_orcamento = fopen("orcamento.txt", "r");
   if (total_orcamento == NULL){
-    printf ("erro na abertura do file\n");
+    printf ("error while opening the file\n");
     exit(1);
   }
 
@@ -658,7 +658,7 @@ void vendas (float *total_vendas){
     printf ("%c", texto);
   } while (texto != EOF);
 
-  printf ("\nTotal das vendas no dia:\nR$ %.2f\n", *total_vendas);
+  printf ("\nTotal of sells:\nR$ %.2f\n", *total_vendas);
 
 }
 
@@ -667,13 +667,13 @@ void editar_product (set_products product[], FILE *file){
   system("cls");
 
   char novo_name[50];
-  int counter, resposta, novo_grupo, quantage;
+  int counter, res, novo_group, quantage;
   long int cod_product, novo_cod;
-  float novo_preco;
+  float novo_price;
 
-  quantage = abre_file_product(product, file);
+  quantage = open_file_product(product, file);
 
-  printf ("Digite o cod do product que voce deseja editar: ");
+  printf ("type the cod of the product you want to edit: ");
     scanf ("%ld", &cod_product);
     setbuf(stdin, NULL);
 
@@ -683,70 +683,70 @@ void editar_product (set_products product[], FILE *file){
       system ("cls");
       do {
 
-        printf ("Qual dado voce quer editar?\n");
-        printf ("[1]name\n[2]Grupo\n[3]cod\n[4]Preco\n----------\n");
-          scanf ("%d", &resposta);
+        printf ("Which data you want to edit?\n");
+        printf ("[1]name\n[2]group\n[3]cod\n[4]price\n----------\n");
+          scanf ("%d", &res);
           setbuf(stdin, NULL);
         // aux ++;
   
-        switch (resposta)
+        switch (res)
         {
   
         case 1:
-          printf ("Digite o novo name: ");
+          printf ("type o novo name: ");
             scanf ("%[^\n]s", novo_name);
             setbuf(stdin, NULL);
           strcpy(product[counter].name, novo_name);
           break;
   
         case 2:
-          printf ("Digite a opcao do grupo:\n");
-          printf ("[1]Bicicleta\n[2]Acessorio\n[3]Vestuario\n----------\n");
-            scanf ("%d", &novo_grupo);
+          printf ("type a option do group:\n");
+          printf ("[1]bike\n[2]accessorie\n[3]clothing\n----------\n");
+            scanf ("%d", &novo_group);
             setbuf(stdin, NULL);
-          switch(novo_grupo){
+          switch(novo_group){
             case 1:
-              strcpy(product[counter].grupo, "Bicicleta");
+              strcpy(product[counter].group, "bike");
               break;
             case 2:
-              strcpy(product[counter].grupo, "Acessorio");
+              strcpy(product[counter].group, "accessorie");
               break;
             case 3:
-              strcpy(product[counter].grupo, "Vestuario");
+              strcpy(product[counter].group, "clothing");
               break;
             default:
-              printf ("Opcao invalida\n");
+              printf ("option invalida\n");
               break;
           }
           break;
         
         case 3: 
-          printf ("Digite o novo cod: ");
+          printf ("type o novo cod: ");
             scanf("%ld", &novo_cod);
             setbuf(stdin, NULL);
           product[counter].cod = novo_cod;
           break;
   
         case 4:
-          printf ("Digite o novo preco: R$");
-            scanf ("%f", &novo_preco);
+          printf ("type o novo price: R$");
+            scanf ("%f", &novo_price);
             setbuf(stdin, NULL);
-          product[counter].preco = novo_preco;
+          product[counter].price = novo_price;
           break;
         
         default:
           system("cls");
-          printf ("Opcao invalida\n");
+          printf ("option invalida\n");
           break;
         }
 
-      } while (resposta != 1 && resposta != 2 && resposta != 3 && resposta != 4);
+      } while (res != 1 && res != 2 && res != 3 && res != 4);
     }
   }
   fecha_file_product(product, quantage, file);
 }
 
-void alugar_bicicleta (set_products T[], int *quantage_product, int *quantage_client){
+void alugar_bike (set_products T[], int *quantage_product, int *quantage_client){
 
   system("cls");
 
@@ -756,11 +756,11 @@ void alugar_bicicleta (set_products T[], int *quantage_product, int *quantage_cl
 
   printf("quantage %p", *quantage_product);
 
-    printf ("Digite o cpf do client que deseja alugar a bicicleta: ");
+    printf ("type o cpf do client que deseja alugar a bike: ");
     scanf ("%[^\n]s", cpf_client);
 
 
-    printf ("Digite o cod da bicicleta que deseja alugar: ");
+    printf ("type o cod da bike que deseja alugar: ");
     scanf ("%ld", &cod_product);
 
 
@@ -774,10 +774,10 @@ void alugar_bicicleta (set_products T[], int *quantage_product, int *quantage_cl
       //     if (cod_product == T[*quantage_product].cod) {
       //         strcpy(T[*quantage_product].cpf_client, cpf_client);
              
-      //         printf ("Bicicleta alugada com sucesso!");
+      //         printf ("bike alugada com sucesso!");
       //     }
       //     else {
-      //         printf ("Erro, bicicleta não encontrada!");
+      //         printf ("Erro, bike não encontrada!");
       //     }
       // } else {
       //     printf ("Erro, client não encontrado!");
@@ -787,7 +787,7 @@ void alugar_bicicleta (set_products T[], int *quantage_product, int *quantage_cl
 
 void menu(){
 
-	int opcao, quantage_product = 0, quantage_client = 0;
+	int option, quantage_product = 0, quantage_client = 0;
   float vendas_do_dia = 0, *total_vendas;
 	set_products P[50];
   set_clients R[50];
@@ -803,31 +803,31 @@ void menu(){
 	while(1){
 		printf("\nBem vindo ao Sistema de Bikes Lobo ");
 		printf("\n1- Cadastrar products ");
-		printf("\n2- Mostrar todos os products");
-		printf("\n3- Mostrar products por grupo");
+		printf("\n2- showr todos os products");
+		printf("\n3- showr products por group");
     printf("\n4- Editar products");
     printf("\n5- Cadastrar clients");
-    printf("\n6- Mostrar todos os clients");
-    printf("\n7- Mostrar client especifico");
+    printf("\n6- showr todos os clients");
+    printf("\n7- showr client especifico");
 		printf("\n8- Venda");
-    printf("\n9- Alugar bicicletas");
+    printf("\n9- Alugar bikes");
     printf("\n10- Relatorio de Vendas");
 		printf("\n11- Sair");
-		printf("\nDigite opcao: ");
-		scanf("%d", &opcao);
+		printf("\ntype option: ");
+		scanf("%d", &option);
     setbuf(stdin, NULL);
 
-		if(opcao == 1) cadastro_product(P, product);
-		if(opcao == 2) mostra_product(P, product);
-		if(opcao == 3) mostra_product_grupo(P, product);
-    if(opcao == 4) editar_product(P, product);
-		if(opcao == 5) cadastro_client(R, client);
-    if(opcao == 6) mostra_client(R, client);
-    if(opcao == 7) mostra_client_cpf(R, client);
-    if(opcao == 8) orcamento(R, qtde_client, P, qtde_product, total_vendas);
-    if(opcao == 9) alugar_bicicleta(P, qtde_product, qtde_client);
-    if(opcao == 10) vendas(total_vendas);
-		if(opcao == 11) return;
+		if(option == 1) cadastro_product(P, product);
+		if(option == 2) show_product(P, product);
+		if(option == 3) show_product_group(P, product);
+    if(option == 4) editar_product(P, product);
+		if(option == 5) cadastro_client(R, client);
+    if(option == 6) show_client(R, client);
+    if(option == 7) show_client_cpf(R, client);
+    if(option == 8) orcamento(R, qtde_client, P, qtde_product, total_vendas);
+    if(option == 9) alugar_bike(P, qtde_product, qtde_client);
+    if(option == 10) vendas(total_vendas);
+		if(option == 11) return;
 	}
 }
 
@@ -839,7 +839,7 @@ int main(){
 
 
 // função tanto para ler quanto para escrever
-// int abre_file_product(cadastro_product T[], *quantage_product)
+// int open_file_product(cadastro_product T[], *quantage_product)
 // int counter = 0;
 
 // do {
