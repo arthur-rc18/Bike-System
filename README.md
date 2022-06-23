@@ -1,3 +1,3 @@
 Project of a bike factory done in C.
 
-In this project you can add, remove, sell, buy and rent bikes. You can also
+In this project you can add, remove, sell, buy and rent bikes. You can also add users that will interact with the system.
